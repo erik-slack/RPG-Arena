@@ -1,12 +1,10 @@
 #include "BattleArena.h"
 using namespace std;
 
-
 Arena::Arena(){}
-
 Arena::~Arena(){}
 
-bool Arena::name_checker(string in_name) // Used by add fighter
+bool Arena::name_checker(string in_name)
 {
 	bool is_copy = false;
 
@@ -21,7 +19,7 @@ bool Arena::name_checker(string in_name) // Used by add fighter
 	return is_copy;
 }
 
-bool Arena::value_checker(int value1, int value2, int value3, int value4) // Used by add fighter
+bool Arena::value_checker(int value1, int value2, int value3, int value4)
 {
 	bool is_valid = false;
 
@@ -37,6 +35,9 @@ bool Arena::value_checker(int value1, int value2, int value3, int value4) // Use
 	return is_valid;
 }
 
+/*
+	*	Return true if a new fighter was added; false otherwise.
+	*/
 bool Arena::addFighter(string info)
 {
 	// Adds a new fighter to the collection of fighters in the arena.
@@ -51,8 +52,31 @@ bool Arena::addFighter(string info)
 	
 	input_ss >> name >> type;
 	
+	//cout << "fighter name = " << name << endl;
+	
 	//start of the value tests
-	input_ss >> hit_points >> strength >> speed >> magic;
+	input_ss >> hit_points;
+	
+	if(input_ss.fail())
+	{
+		has_failed = true;
+	}
+	
+	input_ss >> strength;
+	
+	if(input_ss.fail())
+	{
+		has_failed = true;
+	}
+	
+	input_ss >> speed;
+	
+	if(input_ss.fail())
+	{
+		has_failed = true;
+	}
+
+	input_ss >> magic;
 	
 	if(input_ss.fail())
 	{
@@ -60,16 +84,16 @@ bool Arena::addFighter(string info)
 	}
 
 	input_ss >> surplus_input;
+
 	if(!input_ss.fail())
 	{
 		has_failed = true;
 	}
-
+	
 	is_positive = value_checker(hit_points, strength, speed, magic); // Tests to see if values are positive
 
 	is_duplicate = name_checker(name); //Do not allow duplicate names.
 
-	// Return true if a new fighter was added; false otherwise.
 	if (type == "A" && is_positive == true && has_failed == false && is_duplicate == false)
 	{
 		FighterInterface* f_name = new Archer(name, hit_points, strength, speed, magic);
@@ -78,6 +102,7 @@ bool Arena::addFighter(string info)
 	}
 	else if (type == "C" && is_positive == true && has_failed == false && is_duplicate == false)
 	{
+		//cout << "fighter name = " << name << " type = " << type << endl;
 		FighterInterface* f_name = new Cleric(name, hit_points, strength, speed, magic);
 		all_fighters.push_back(f_name);
 		return true;
@@ -112,15 +137,17 @@ bool Arena::removeFighter(string in_name)
 		
 FighterInterface* Arena::getFighter(string in_name)
 {
-	bool test = false;
+	//cout << "fighters count: " << Arena::getSize() << endl;
+	bool isFighter = false;
 	FighterInterface* memory_location = NULL; // Returns NULL if no fighter is found with the given name.
 
 	for (int i = 0; i < all_fighters.size(); i++)
 	{
 		if (in_name == all_fighters[i]->getName() ) 
 		{
+			
 			memory_location = all_fighters[i]; // Return a memory address if a fighter is found; NULL otherwise.
-			test = true; 
+			isFighter = true; 
 		}
 	}
 
