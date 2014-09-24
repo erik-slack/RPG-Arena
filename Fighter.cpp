@@ -3,13 +3,15 @@ using namespace std;
 
 
 // CONSTRUCTORS
-Fighter::Fighter(string name2, int hit_points2, int strength2, int speed2, int magic2)
+Fighter::Fighter(string nameIn, /*string type,*/ int mhpIn, int strengthIn, int speedIn, int magicIn)
 {
-	name = name2;
-	hit_points = hit_points2;
-	strength = strength2;
-	speed = speed2;
-	magic = magic2;
+	name = nameIn;
+	//type = type;
+	hit_points = mhpIn;
+	strength = strengthIn;
+	speed = speedIn;
+	magic = magicIn;
+	
 	currentHP = hit_points;
 }
 
@@ -72,6 +74,7 @@ bool Fighter::useAbility()
 // ANALYZERS
 string Fighter::getName()
 {
+	//cout << "name = " << name << endl;
 	return name; // Returns the name of this fighter.
 }
 
