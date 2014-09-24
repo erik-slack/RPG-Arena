@@ -7,7 +7,7 @@ class Fighter : public FighterInterface
 {
 public:
 	// CONSTRUCTORS
-	Fighter(string name, /*string type,*/ int mhp, int strength, int speed, int magic);
+	Fighter(string nameIn, /*string type,*/ int mhpIn, int strengthIn, int speedIn, int magicIn);
 	~Fighter(void);
 
 	// MUTATORS
