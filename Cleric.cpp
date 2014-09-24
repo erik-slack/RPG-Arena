@@ -3,14 +3,14 @@ using namespace std;
 
 
 // CONSTRUCTORS
-Cleric::Cleric(string name2, int hit_points2, int strength2, int speed2, int magic2):Fighter(name2, hit_points2, strength2, speed2, magic2)
+Cleric::Cleric(string name2, /*string type,*/ int hit_points2, int strength2, int speed2, int magic2):Fighter(name2, /*string type,*/ hit_points2, strength2, speed2, magic2)
 {
 	//type = "C";
 	mana = magic * 5;
 	max_mana = magic * 5;
 }
 
-Cleric::~Cleric(){}
+Cleric::~Cleric(void){}
 
 // MUTATORS
 void Cleric::reset()
